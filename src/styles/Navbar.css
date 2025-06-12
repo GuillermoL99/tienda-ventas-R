@@ -1,0 +1,224 @@
+
+
+/* Header */
+header {
+  background: #fffefe;
+  border-bottom: 2px solid #b3b3b3;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px 10px 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
+}
+.icon-logo {
+  font-size: 34px;
+  margin-right: 8px;
+}
+.site-name {
+  color: #222;
+}
+.site-name .dotcom {
+  color: #ff5200;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  width: 430px;
+  max-width: 95vw;
+}
+.searchbar input {
+  flex: 1;
+  padding: 9px 13px;
+  border: 1px solid #ccc;
+  border-radius: 3px 0 0 3px;
+  font-size: 16px;
+  outline: none;
+}
+.search-btn {
+  background: #ff5200;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  padding: 19px 36px;
+  cursor: pointer;
+}
+.search-btn .icon-search {
+  color: #fff;
+  font-size: 18px;
+}
+
+/* Navegación principal y mega menú */
+.nav-menu {
+  display: flex;
+  gap: 19px;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 30px;
+  font-size: 1.12rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.nav-menu > li {
+  color: #000000;
+  padding: 12px 0 10px 0;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+
+.mega-dropdown {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 45px;
+  min-width: 900px;
+  min-height: 430px;
+  background: rgba(255,255,255,0.97);
+  border-top: 2px solid #ff0303;
+  z-index: 10;
+  align-items: stretch;
+ opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-30px);
+  transition:
+    opacity 0.8s cubic-bezier(.4,0,.2,1),
+    transform 0.8s cubic-bezier(.4,0,.2,1),
+    visibility 0s linear 0.8s;
+}
+
+.mega-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.mega-dropdown-left {
+  background: #fff;
+  padding: 32px 0 32px 0;
+  min-width: 320px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-right: 1px solid #eee;
+}
+
+.mega-dropdown-left ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 28px;
+}
+.mega-dropdown-left li {
+  margin-bottom: 14px;
+}
+.mega-dropdown-left li.active,
+.mega-dropdown-left li:hover {
+  color: #ff5200;
+  border-left: 3px solid #ff5200;
+  font-weight: 500;
+  background: #fff;
+}
+.mega-dropdown-left li a {
+  text-decoration: none;
+  color: #232323;
+  font-size: 1.17rem;
+  font-weight: 400;
+  display: block;
+  padding-left: 1px;
+  transition: color 0.2s, border-left 0.2s, padding-left 0.2s;
+  border-left: 3px solid transparent;
+}
+.mega-dropdown-left li a:hover,
+.mega-dropdown-left li a.active {
+  color: #ff5200;
+  border-left: 3px solid #ff5200;
+  padding-left: 7px;
+  font-weight: 500;
+}
+
+.mega-dropdown-center {
+  flex: 1;
+  background: rgba(255,255,255,0.5); /* fondo semitransparente */
+  padding: 32px 0 32px 48px;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  min-width: 340px;
+  max-width: 950px;
+}
+
+.subcategorias-panel {
+  display: flex;
+  gap: 48px;
+  background-color: transparen;
+  width: 100%;
+}
+
+.dropdown-category-block {
+  min-width: 170px;
+  max-width: 210px;
+}
+
+.dropdown-category-title {
+  font-size: 1.12rem;
+  font-weight: bold;
+  color: #353535;
+  margin-bottom: 15px;
+}
+
+.dropdown-category-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-category-list li {
+  font-size: 1rem;
+  color: #ff0000;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.dropdown-category-list li:hover {
+  color: #ff5200;
+  text-decoration: underline;
+}
+
+.ver-todos {
+  align-self: flex-end;
+  font-size: 16px;
+  color: #444;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 7px;
+}
+.ver-todos:hover {
+  color: #ff5200;
+  text-decoration: underline;
+}
+
+/* Opcional: para el panel derecho si lo usas */
+
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 20px; /* Ejemplo: 16px arriba/abajo, 32px a los lados */
+}
