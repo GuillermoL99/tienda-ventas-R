@@ -1,0 +1,119 @@
+/* Estilos para el autocomplete de sugerencias en la barra de búsqueda */
+
+.searchbar {
+  position: relative;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.16s;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item:active {
+  background: #f5f5f5;
+}
+
+.suggestion-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  background: #fafafa;
+}
+
+.suggestion-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.suggestion-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  line-height: 1.1;
+}
+
+.suggestion-price {
+  font-size: 0.95rem;
+  color: #ff5200;
+  font-weight: 600;
+}
+
+.suggestion-desc {
+  font-size: 0.85rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+/* Botón limpiar */
+.clear-btn {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.18s,
+    box-shadow 0.18s,
+    color 0.18s,
+    border 0.18s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  outline: none;
+}
+
+.clear-btn:hover,
+.clear-btn:focus {
+  background: #ffe6e0;
+  color: #ff5200;
+  border-color: #ff5200;
+  box-shadow: 0 2px 8px rgba(255,82,0,0.13);
+}
+
+.clear-btn:active {
+  background: #ffd2c2;
+  color: #fff;
+  border-color: #ff5200;
+}
+

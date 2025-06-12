@@ -1,11 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import categorias from "../logicas/categorias.js";
+import productos from "../logicas/productos.js"; // Asegúrate de que la ruta sea correcta
 
 function Navbar({ mostrarInicio = false }) {
   const [open, setOpen] = useState(false);
   const [hoveredCatIdx, setHoveredCatIdx] = useState(null);
   const dropdownRef = useRef(null);
+
+  // Búsqueda en vivo y sugerencias
+  const [busqueda, setBusqueda] = useState("");
+  const [sugerencias, setSugerencias] = useState([]);
+  const navigate = useNavigate();
+
+  // Filtrar sugerencias en vivo
+  useEffect(() => {
+    if (busqueda.trim().length > 0) {
+      const texto = busqueda.trim().toLowerCase();
+      const filtrados = productos.filter(
+        p =>
+          p.nombre.toLowerCase().includes(texto) ||
+          p.descripcion.toLowerCase().includes(texto)
+      );
+      setSugerencias(filtrados.slice(0, 8)); // Puedes ajustar la cantidad de sugerencias
+    } else {
+      setSugerencias([]);
+    }
+  }, [busqueda]);
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && busqueda.trim() !== "") {
+      navigate(`/buscar?q=${encodeURIComponent(busqueda)}`);
+      setSugerencias([]);
+    }
+  }
+
+  function handleClear() {
+    setBusqueda("");
+    setSugerencias([]);
+  }
+
+  function handleSuggestionClick(producto) {
+    setBusqueda(producto.nombre);
+    setSugerencias([]);
+    navigate(`/producto/${producto.id}`);
+  }
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -38,10 +77,52 @@ function Navbar({ mostrarInicio = false }) {
             </span>
           </div>
           <div className="searchbar">
-            <input type="text" placeholder="Buscar productos" />
-            <button className="search-btn" aria-label="Buscar">
-              <span className="icon-search"></span>
-            </button>
+            <input
+              type="text"
+              placeholder="Buscar productos"
+              value={busqueda}
+              onChange={e => setBusqueda(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoComplete="off"
+            />
+            {busqueda && (
+              <button
+                className="clear-btn"
+                aria-label="Limpiar búsqueda"
+                onClick={handleClear}
+              >
+                ×
+              </button>
+            )}
+            {/* SUGERENCIAS EN VIVO */}
+            {sugerencias.length > 0 && (
+              <ul className="suggestions-list">
+                {sugerencias.map(producto => (
+                  <li
+                    key={producto.id}
+                    className="suggestion-item"
+                    onMouseDown={() => handleSuggestionClick(producto)}
+                  >
+                    {producto.imagen && (
+                      <img
+                        src={producto.imagen}
+                        alt={producto.nombre}
+                        className="suggestion-img"
+                      />
+                    )}
+                    <div className="suggestion-content">
+                      <span className="suggestion-title">{producto.nombre}</span>
+                      <span className="suggestion-price">
+                        {producto.precio ? `$${producto.precio}` : ""}
+                      </span>
+                      <span className="suggestion-desc">
+                        {producto.descripcion}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
         <nav>
@@ -80,7 +161,6 @@ function Navbar({ mostrarInicio = false }) {
                       ))}
                     </ul>
                   </div>
-
                   <div className="mega-dropdown-center">
                     {hoveredCatIdx !== null && (
                       <div className="subcategorias-panel">
@@ -100,7 +180,6 @@ function Navbar({ mostrarInicio = false }) {
                       </div>
                     )}
                   </div>
-
                   <div className="mega-dropdown-right">
                     {/* Aquí puedes agregar banners, imágenes, etc */}
                   </div>
